@@ -16,7 +16,7 @@ public class SecurityController {
     @RequestMapping("/hello")
     public String hello(Model model) {
         model.addAttribute("msg", "message");
-        return "index";
+        return "re";
     }
 
     @RequestMapping("/")
