@@ -1,7 +1,6 @@
 package com.lance.demo.spring.security.config;
 
 import com.lance.demo.spring.security.service.UserService;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,12 +11,9 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.savedrequest.RequestCache;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private RequestCache requestCache = null;
-
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserService();
@@ -27,8 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
-
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
