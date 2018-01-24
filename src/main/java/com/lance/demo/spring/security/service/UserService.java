@@ -15,22 +15,23 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return new UserDetails() {
+            String name = username.equals("admin") ? "admin" : "user";
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
                 Collection<GrantedAuthority> collection = new ArrayList<>();
-                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("admin");
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_"+name);
                 collection.add(grantedAuthority);
-                return new ArrayList<>();
+                return collection;
             }
 
             @Override
             public String getPassword() {
-                return username.equals("admin")?"admin":null;
+                return name;
             }
 
             @Override
             public String getUsername() {
-                return username;
+                return name;
             }
 
             @Override
